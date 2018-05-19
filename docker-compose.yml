@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+  webserver:
+    image: nginx:latest
+    volumes:
+      - ./conf:/etc/nginx/conf.d/:ro
+      - /data:/data:ro
+      - ./letsencrypt/live/tpp.pt/fullchain.pem:/etc/ssl/certs/tpp-wildcard.crt:ro
+      - ./letsencrypt/live/tpp.pt/privkey.pem:/etc/ssl/private/tpp-wildcard.key:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./logs:/var/log/nginx
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+  job-scheduler:
+    image: mcuadros/ofelia:latest
+    volumes:
+      - ./scheduler.ini:/etc/ofelia/config.ini
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./logs:/tmp/logs
+      - ./letsencrypt:/etc/letsencrypt
+      - ./letsencrypt/lib:/var/lib/letsencrypt
+    restart: always
