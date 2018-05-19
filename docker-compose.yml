@@ -13,11 +13,11 @@ services:
       - 80:80
       - 443:443
     network_mode: "host"
-    links:
-      - php
     restart: always
   php:
     image: php:7-fpm
+    ports:
+      - 9000:9000
     volumes:
       - /data:/data:ro
   job-scheduler:
