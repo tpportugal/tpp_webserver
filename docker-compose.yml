@@ -4,7 +4,6 @@ services:
     image: nginx:latest
     volumes:
       - ./conf:/etc/nginx/conf.d:ro
-      - ./fastcgi_params:/etc/nginx/fastcgi_params:ro
       - /data:/data:ro
       - ./letsencrypt/live/tpp.pt/fullchain.pem:/etc/ssl/certs/tpp-wildcard.crt:ro
       - ./letsencrypt/live/tpp.pt/privkey.pem:/etc/ssl/private/tpp-wildcard.key:ro
@@ -15,12 +14,6 @@ services:
       - 443:443
     network_mode: "host"
     restart: always
-  php:
-    image: php:7-fpm
-    ports:
-      - 9000:9000
-    volumes:
-      - /data:/var/www/html:ro
   job-scheduler:
     image: mcuadros/ofelia:latest
     volumes:
