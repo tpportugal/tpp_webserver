@@ -14,6 +14,8 @@ services:
       - 443:443
     network_mode: "host"
     restart: always
+  php:
+    image: php:7-fpm
   job-scheduler:
     image: mcuadros/ofelia:latest
     volumes:
