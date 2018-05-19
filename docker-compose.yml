@@ -3,7 +3,7 @@ services:
   webserver:
     image: nginx:latest
     volumes:
-      - ./conf:/etc/nginx/conf.d/:ro
+      - ./conf:/etc/nginx/conf.d:ro
       - /data:/data:ro
       - ./letsencrypt/live/tpp.pt/fullchain.pem:/etc/ssl/certs/tpp-wildcard.crt:ro
       - ./letsencrypt/live/tpp.pt/privkey.pem:/etc/ssl/private/tpp-wildcard.key:ro
