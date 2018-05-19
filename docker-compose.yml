@@ -20,7 +20,7 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - /data:/data:ro
+      - /data:/var/www/html:ro
   job-scheduler:
     image: mcuadros/ofelia:latest
     volumes:
